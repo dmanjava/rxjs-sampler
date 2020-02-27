@@ -3,6 +3,9 @@ import {
   OnInit,
   ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, of, from } from 'rxjs';
+import { map, share, switchMap, tap } from 'rxjs/operators';
+import { Person } from '../../models/models';
 
 @Component({
   selector: 'app-main-container',
@@ -14,12 +17,14 @@ export class MainContainerComponent implements OnInit {
   @ViewChild('outputDiv', {static: true})
   private outputDiv;
 
-  private output: string = 'Console log...';
+  private output: string = 'Console log. Waiting...';
+
+  person: Person;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    // this.writeLog('Waiting...');
+    this.person = new Person('Clarence', 'Darnell', 'Whitaker');
   }
 
   clearOutput() {
@@ -33,8 +38,21 @@ export class MainContainerComponent implements OnInit {
   }
 
 
+  // create obserable from an object
   doOf() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    const person$:  Observable<Person> = of(this.person);
+    person$.subscribe( data => this.output = 'of: ' + JSON.stringify(data));
+  }
 
+  // create observable from a promise
+  doFrom() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    const personPromise = Promise.resolve(this.person);
+    const person$: Observable<Person> = from(personPromise);
+    person$.subscribe( data => this.output = 'from: ' + JSON.stringify(data));
   }
 
 }
