@@ -17,9 +17,12 @@ export class MainContainerComponent implements OnInit {
   @ViewChild('outputDiv', {static: true})
   private outputDiv;
 
-  private output: string = 'Console log. Waiting...';
+  private output: string = 'Click an operator button...';
 
   person: Person;
+
+  postsUrl = 'https://jsonplaceholder.typicode.com/posts';
+  todosUrl = 'https://jsonplaceholder.typicode.com/todos';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -32,7 +35,6 @@ export class MainContainerComponent implements OnInit {
   }
 
   writeLog(data: string) {
-    debugger;
     // this.outputDiv.nativeElement.childNodes[0].appendChild(document.createTextNode(data));
     this.output = data;
   }
@@ -53,6 +55,67 @@ export class MainContainerComponent implements OnInit {
     const personPromise = Promise.resolve(this.person);
     const person$: Observable<Person> = from(personPromise);
     person$.subscribe( data => this.output = 'from: ' + JSON.stringify(data));
+  }
+
+  // alter the data
+  doMap() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    // use map to manipulate the data
+    const person$: Observable<Person> = of(this.person);
+    person$
+      .pipe(
+        map(p => p.firstName.toUpperCase())
+      ).subscribe(data => this.output = 'map: ' + JSON.stringify(data));
+  }
+
+  // get the data but don't alter it
+  doTap() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    const person$: Observable<Person> = of(this.person);
+    person$
+      .pipe(
+        tap(p => p.firstName.toLowerCase())
+      ).subscribe(data => this.output = 'tap: ' + JSON.stringify(data));
+  }
+
+  private getPosts(): Observable<any> {
+    return this.httpClient.get<any>(this.postsUrl).pipe(share());
+  }
+
+  private getTodos(): Observable<any> {
+    return this.httpClient.get<any>(this.todosUrl).pipe(share());
+  }
+
+  // share the stream across subscriptions
+  doShare() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    const posts$ = this.getPosts();
+    posts$.subscribe(data => this.output = 'share: ' + JSON.stringify(data));
+    return posts$;
+  }
+
+  doSwitchMap() {
+    this.clearOutput();
+    this.writeLog('Working...');
+    // the observables
+    const posts$ = this.getPosts();
+    const todos$ = this.getTodos();
+    // combine the oberservables
+    const combined$ = posts$.pipe(
+      switchMap(posts$ => {
+        return todos$.pipe(
+          tap(todos$ => {
+            this.output += 'switchMap - todos: ' + JSON.stringify(todos$);
+            this.output += '--------------------------------------------';
+            this.output += 'switchMap - posts: ' + JSON.stringify(posts$);
+          })
+        );
+      })
+    );
+    combined$.subscribe();
   }
 
 }
