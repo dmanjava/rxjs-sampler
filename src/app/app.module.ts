@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainContainerComponent } from './components/main-container/main-container.component';
+import { SearchContainerComponent } from './components/search-container/search-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainContainerComponent
+    MainContainerComponent,
+    SearchContainerComponent
   ],
   imports: [
     BrowserModule,

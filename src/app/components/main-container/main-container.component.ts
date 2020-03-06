@@ -40,11 +40,11 @@ export class MainContainerComponent implements OnInit {
   }
 
 
-  // create obserable from an object
+  // create observable from an object
   doOf() {
     this.clearOutput();
     this.writeLog('Working...');
-    const person$:  Observable<Person> = of(this.person);
+    const person$: Observable<Person> = of(this.person);
     person$.subscribe( data => this.output = 'of: ' + JSON.stringify(data));
   }
 
