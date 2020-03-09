@@ -5,17 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainContainerComponent } from './components/main-container/main-container.component';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule,
+  MatButtonModule,
+  MatButtonToggleModule
+} from '@angular/material';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule
+  ],
   declarations: [
     AppComponent,
     MainContainerComponent,
     SearchContainerComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
