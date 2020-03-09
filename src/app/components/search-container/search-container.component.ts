@@ -10,6 +10,7 @@ export class SearchContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    debugger;
   }
 
 }

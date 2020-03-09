@@ -1,10 +1,12 @@
+<mat-button-toggle-group>
+  <mat-button-toggle (click)="doOf()">of</mat-button-toggle>
+  <mat-button-toggle (click)="doFrom()">from</mat-button-toggle>
+  <mat-button-toggle (click)="doMap()">map</mat-button-toggle>
+  <mat-button-toggle (click)="doTap()">tap</mat-button-toggle>
+  <mat-button-toggle (click)="doShare()">share</mat-button-toggle>
+  <mat-button-toggle (click)="doSwitchMap()">switchMap</mat-button-toggle>
+</mat-button-toggle-group>
 
-<button (click)="doOf()">of</button>
-<button (click)="doFrom()">from</button>
-<button (click)="doMap()">map</button>
-<button (click)="doTap()">tap</button>
-<button (click)="doShare()">share</button>
-<button (click)="doSwitchMap()">switchMap</button>
 <div #outputDiv class="output">
   {{output}}
 </div>
