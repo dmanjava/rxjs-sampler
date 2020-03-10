@@ -1,6 +1,11 @@
 <form>
   <mat-form-field class="search">
     <mat-label>Search</mat-label>
-    <input matInput placeholder="Type here...">
+    <input matInput
+           placeholder="Type here..."
+           name="search"
+           [(ngModel)]="search">
   </mat-form-field>
 </form>
+
+{{search | json}}

@@ -349,9 +349,9 @@
 
   </div>
 
-  <app-main-container></app-main-container>
+  <app-main-container #main></app-main-container>
   <hr>
-  <app-search-container></app-search-container>
+  <app-search-container #search [main]="main"></app-search-container>
 
   <!-- Links -->
   <div class="card-container">

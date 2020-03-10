@@ -80,11 +80,11 @@ export class MainContainerComponent implements OnInit {
       ).subscribe(data => this.output = 'tap: ' + JSON.stringify(data));
   }
 
-  private getPosts(): Observable<any> {
+  getPosts(): Observable<any> {
     return this.httpClient.get<any>(this.postsUrl).pipe(share());
   }
 
-  private getTodos(): Observable<any> {
+  getTodos(): Observable<any> {
     return this.httpClient.get<any>(this.todosUrl).pipe(share());
   }
 
