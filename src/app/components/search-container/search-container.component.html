@@ -4,8 +4,12 @@
     <input matInput
            placeholder="Type here..."
            name="search"
-           [(ngModel)]="search">
+           [(ngModel)]="search"
+           (keyup)="doSearch(search)">
   </mat-form-field>
 </form>
 
-{{search | json}}
+Search {{search | json}}
+<hr>
+Results {{result$ | async}}
+

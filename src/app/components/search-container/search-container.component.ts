@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {debounceTime, switchMap} from 'rxjs/operators';
 import {MainContainerComponent} from '../main-container/main-container.component';
 
 @Component({
@@ -19,13 +19,18 @@ export class SearchContainerComponent implements OnInit {
 
   ngOnInit() {}
 
-  doSearch(text$: Observable<string>): Observable<string> {
+  doSearch(text: string): Observable<string> {
+    debugger;
+    const text$ = of(text);
     return text$.pipe(
-      switchMap( searcTerm => {
-        if (!searcTerm) {
+      debounceTime(500),
+      switchMap( searchTerm => {
+        if (!searchTerm) {
           return [];
         }
-        return this.mainComponment.getPosts();
+        debugger;
+        this.result$ = this.mainComponment.getPosts();
+        return this.result$;
       })
     );
   }
