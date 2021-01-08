@@ -9,6 +9,6 @@ import {SearchContainerComponent} from './components/search-container/search-con
 })
 export class AppComponent {
   title = 'rxjs-sampler';
-  @ViewChild('main', {static: false}) main: MainContainerComponent;
-  @ViewChild('search', {static: false} )search: SearchContainerComponent;
+  @ViewChild('main') main: MainContainerComponent;
+  @ViewChild('search')search: SearchContainerComponent;
 }
