@@ -17,7 +17,7 @@ export class MainContainerComponent implements OnInit {
   @ViewChild('outputDiv', {static: true})
   private outputDiv;
 
-  private output: string = 'Click an operator button...';
+  output: string = 'Click an operator button...';
 
   person: Person;
 
