@@ -7,10 +7,9 @@ import { AppComponent } from './app.component';
 import { MainContainerComponent } from './components/main-container/main-container.component';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule,
-  MatButtonModule,
-  MatButtonToggleModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
